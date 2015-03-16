@@ -1,0 +1,20 @@
+PODS:
+  - Expecta (0.3.2)
+  - notifit-ios-sdk (0.1.0)
+  - Specta (0.4.0)
+
+DEPENDENCIES:
+  - Expecta
+  - notifit-ios-sdk (from `../`)
+  - Specta
+
+EXTERNAL SOURCES:
+  notifit-ios-sdk:
+    :path: ../
+
+SPEC CHECKSUMS:
+  Expecta: ee641011fe10aa1855d487b40e4976dac50ec342
+  notifit-ios-sdk: 443994ffd70a9012df8579577c87a54c8f9b1c23
+  Specta: 1df326d6ec48603c77f507a0ab1f89ad2df1c582
+
+COCOAPODS: 0.35.0
