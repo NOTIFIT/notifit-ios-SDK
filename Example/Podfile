@@ -1,0 +1,12 @@
+source 'https://github.com/CocoaPods/Specs.git'
+
+target 'notifit-ios-sdk', :exclusive => true do
+  pod "notifit-ios-sdk", :path => "../"
+end
+
+target 'Tests', :exclusive => true do
+  pod "notifit-ios-sdk", :path => "../"
+
+  pod 'Specta'
+  pod 'Expecta'
+end
