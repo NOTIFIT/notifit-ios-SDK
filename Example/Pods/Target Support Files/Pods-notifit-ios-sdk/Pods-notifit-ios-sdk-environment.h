@@ -9,6 +9,6 @@
 // notifit-ios-sdk
 #define COCOAPODS_POD_AVAILABLE_notifit_ios_sdk
 #define COCOAPODS_VERSION_MAJOR_notifit_ios_sdk 0
-#define COCOAPODS_VERSION_MINOR_notifit_ios_sdk 1
-#define COCOAPODS_VERSION_PATCH_notifit_ios_sdk 0
+#define COCOAPODS_VERSION_MINOR_notifit_ios_sdk 0
+#define COCOAPODS_VERSION_PATCH_notifit_ios_sdk 6
 
