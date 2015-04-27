@@ -2,8 +2,8 @@
 //  NTFViewController.m
 //  notifit-ios-sdk
 //
-//  Created by Lukáš Hromadník on 03/26/2015.
-//  Copyright (c) 2014 Lukáš Hromadník. All rights reserved.
+//  Created by Tomas Sykora, jr. on 23/04/15.
+//  Copyright (c) 2015 AJTY, s.r.o. http://www.ajty.cz All rights reserved.
 //
 
 #import "NTFViewController.h"
@@ -17,7 +17,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+    // Do any additional setup after loading the view, typically from a nib.
 }
 
 - (void)didReceiveMemoryWarning

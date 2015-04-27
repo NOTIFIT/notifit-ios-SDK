@@ -8,8 +8,8 @@
 #
 
 Pod::Spec.new do |s|
-  s.name             = "Notifit-iOS-SDK"
-  s.version          = "0.0.5"
+  s.name             = "notifit-ios-sdk"
+  s.version          = "0.0.7"
   s.summary          = "iOS SDK for NOTIFIT"
   s.description      = <<-DESC
                        iOS SDK for our best idea - NOTIFIT
@@ -19,7 +19,7 @@ Pod::Spec.new do |s|
   s.license          = 'MIT'
   s.author           = { "Lukáš Hromadník" => "lukas.hromadnik@gmail.com", "Tomas Sykora" => "tomas.sykora@notifit.io" }
   s.source           = { :git => "https://github.com/NOTIFIT/notifit-ios-sdk.git", :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+  s.social_media_url = 'https://twitter.com/Syky27'
 
   s.platform     = :ios, '8.0'
   s.requires_arc = true
