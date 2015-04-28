@@ -9,7 +9,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "notifit-ios-sdk"
-  s.version          = "0.0.8"
+  s.version          = "0.0.9"
   s.summary          = "iOS SDK for NOTIFIT"
   s.description      = <<-DESC
                        iOS SDK for our best idea - NOTIFIT

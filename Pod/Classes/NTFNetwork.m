@@ -59,9 +59,9 @@
     [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
 
     NSDictionary *parameters = @{
-        @"Username" : _username,
-        @"Password" : _password
-    };
+                                 @"Username" : _username,
+                                 @"Password" : _password
+                                 };
 
 
     NSError *error;
@@ -76,49 +76,70 @@
     [NSURLConnection sendAsynchronousRequest:request
                                        queue:queue
                            completionHandler: ^ (NSURLResponse *response, NSData *data, NSError *connectionError) {
-        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
-        long statusCode = [httpResponse statusCode];
-        if (statusCode == 200) {
-            TRC_LOG(@"[NOTIFIT]: POST %ld", statusCode)
-        }
+                               NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+                               long statusCode = [httpResponse statusCode];
+                               if (statusCode == 200) {
+                                   TRC_LOG(@"[NOTIFIT]: POST %ld", statusCode)
+                               }
 
-        _responseData = [[NSMutableData alloc] init];
-
-
-        NSError *error;
-        NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
-
-        NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://notifit.io/api/DeviceApple"]]];
-        request.HTTPMethod = @"POST";
-
-        [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-        [request addValue:[NSString stringWithFormat:@"Bearer %@", responseDictionary[@"accessToken"]] forHTTPHeaderField:@"Authorization"];
-
-        NSDictionary *parameters = @{
-            @"DeviceToken" : deviceToken,
-            @"AppToken"    : _appToken
-        };
+                               _responseData = [[NSMutableData alloc] init];
 
 
-        NSData *requestBodyData = [NSJSONSerialization dataWithJSONObject:parameters
-                                                                  options:0
-                                                                    error:&error];
-        request.HTTPBody = requestBodyData;
+                               NSError *error;
+                               NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
+                               [[UIDevice currentDevice] name];
 
-        NSOperationQueue *queue = [[NSOperationQueue alloc] init];
 
-        [NSURLConnection sendAsynchronousRequest:request
-                                           queue:queue
-                               completionHandler: ^ (NSURLResponse *response, NSData *data, NSError *connectionError) {
-            long statusCode = [httpResponse statusCode];
-            if (statusCode == 200) {
-                TRC_LOG(@"[NOTIFIT]: Device Token Successfully POSTed to server %ld", statusCode)
-//                NSDictionary * responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-//                TRC_OBJ(responseDictionary)
-            }
+                               NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://notifit.io/api/DeviceApple"]]];
+                               request.HTTPMethod = @"POST";
 
-        }];
-    }];
+                               [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+                               [request addValue:[NSString stringWithFormat:@"Bearer %@", responseDictionary[@"accessToken"]] forHTTPHeaderField:@"Authorization"];
+
+                               UIDevice * device = [UIDevice currentDevice];
+                               NSTimeZone *timeZone = [NSTimeZone localTimeZone];
+
+                               float differenceToGMT = [[NSTimeZone systemTimeZone] secondsFromGMT] / 3600;
+
+                               NSDictionary *parameters = @{
+                                                            @"DeviceToken" : deviceToken,
+                                                            @"AppToken"    : _appToken,
+                                                            @"DeviceName"  : device.name,
+                                                            @"DeviceSystemName" : device.systemName,
+                                                            @"DeviceSystemVersion" : device.systemVersion,
+                                                            @"DeviceModel" : device.model,
+                                                            @"DeviceLocalizedModel" : device.localizedModel,
+                                                            @"DeviceIdentifierForVendor" : [device.identifierForVendor UUIDString],
+                                                            @"DeviceTimeZone" : timeZone.name,
+                                                            @"DevicePreferedLanguage" : [[NSLocale preferredLanguages] objectAtIndex:0],
+                                                            @"DeviceCFBundleDisplayName" : [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"],
+                                                            @"DeviceCFBundleShortVersionString" : [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"],
+                                                            @"DeviceCFBundleVersion" : [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"],
+                                                            @"DeviceBundleIdentifier" : [[NSBundle mainBundle] bundleIdentifier],
+                                                            @"DeviceDifferenceToGMT": [NSNumber numberWithFloat:differenceToGMT]
+
+                                                            };
+                               
+                               
+                               NSData *requestBodyData = [NSJSONSerialization dataWithJSONObject:parameters
+                                                                                         options:0
+                                                                                           error:&error];
+                               request.HTTPBody = requestBodyData;
+                               
+                               NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+                               
+                               [NSURLConnection sendAsynchronousRequest:request
+                                                                  queue:queue
+                                                      completionHandler: ^ (NSURLResponse *response, NSData *data, NSError *connectionError) {
+                                                          long statusCode = [httpResponse statusCode];
+                                                          if (statusCode == 200) {
+                                                              TRC_LOG(@"[NOTIFIT]: Device Token Successfully POSTed to server %ld", statusCode)
+                                                              //                NSDictionary * responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+                                                              //                TRC_OBJ(responseDictionary)
+                                                          }
+                                                          
+                                                      }];
+                           }];
 }
 
 @end
