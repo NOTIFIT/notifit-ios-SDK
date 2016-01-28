@@ -16,6 +16,12 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 notifit-ios-sdk is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
+```ruby
+pod "notifit-ios-sdk"
+```
+
+
+
 ## Usage
 ```
 let appToken = "edde9798-8aa3-e511-9426-00155d000710"
@@ -25,9 +31,7 @@ let appToken = "edde9798-8aa3-e511-9426-00155d000710"
 ```
 
 
-```ruby
-pod "notifit-ios-sdk"
-```
+
 
 ## Author
 
